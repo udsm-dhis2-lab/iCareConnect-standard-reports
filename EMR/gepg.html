@@ -161,9 +161,7 @@
                   (new Date().getMonth() + 1) +
                   "-" +
                   new Date().getDate(),
-
-              dataSetUuid: "7c052816-b673-454c-a54b-e79fd51ada66",
-              // dataSetUuid: "718fa52e-3de0-4bcb-8c44-9957ac2a8170",
+              dataSetUuid: "03a12717-d078-4966-9cb5-fec2adff7efb",
             };
             $scope.dataRows = [];
             $scope.maxRejectionReasons = 1;
@@ -184,33 +182,25 @@
   </head>
   <body>
     <div id="report-app" ng-app="reportModule" ng-controller="reportController">
-      <h3 class="text-center">Billable Item List Report</h3>
+      <h3 class="text-center">GEPG Report</h3>
       <div style="width: 100%; overflow: auto; margin-top: 16px">
         <table class="table table-bordered" ng-if="!loading">
           <thead style="background-color: #2e8180; color: #fff">
             <tr>
               <th>S/NO</th>
-              <th>NAME</th>
-              <th>Drug id</th>
-              <th>Concept id</th>
-              <th>TYPE</th>
-              <th>Uuid</th>
-              <th>Drug concept name</th>
-           
+              <th>Full name</th>
+              <th>Control Number</th>
+              <th>Date Created</th>
+             
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="dataRow in dataRows;">
               <td>{{$index+1}}</td>
-              <td>{{dataRow.name}}</td>
-              <td>{{dataRow.Drug_id}}</td>
-              <td>{{dataRow.Concept_name_id}}</td>
-              <td>{{dataRow.Type}}</td>
-              <td>{{dataRow.uuid}}</td>
-              <td>{{dataRow.Drug_concept_name}}</td>
-              
-              
-            
+              <td>{{dataRow.full_name}}</td>
+              <td>{{dataRow.reference_number}}</td>
+              <td>{{dataRow.Date_created}}</td>
+             
             </tr>
           </tbody>
         </table>
