@@ -254,7 +254,7 @@
             $scope.startDate;
             $scope.endDate;
             $scope.loadedFilters = false;
-            $scope.dataSetUuid = "b78dec33-faeb-4e32-aacb-0d1863f07b51";
+            $scope.dataSetUuid = "c76fc134-cae7-4ce8-8f1f-a0be49f95233";
             $scope.loading = false;
             $scope.loaded = false;
             $scope.dataRows = [];
@@ -393,7 +393,7 @@
   </head>
   <body>
     <div id="report-app" ng-app="reportModule" ng-controller="reportController">
-      <h2 class="text-center report-header">Bin Card</h2>
+      <h2 class="text-center report-header">Item Issued</h2>
       <p ng-if="!loadedFilters">Loading filters ......................</p>
       <div class="filters row" ng-if="loadedFilters">
         <div class="col-lg-3 col-md-3 col-sx-12 col-sm-12">
@@ -524,13 +524,9 @@
               <th>Date</th>
               <th>Ref. No</th>
               <th>Batch</th>
-              <th>Receipt from/ issued to</th>
-              <th>Quantity Received</th>
+              <th>Item Issued</th>
               <th>Quantity Issued</th>
-              <th>Expiry Date</th>
-              <th>Balance</th>
-              <th>Remarks</th>
-              <th>Initials</th>
+              <th>Location</th>
             </tr>
           </thead>
           <tbody>
@@ -539,13 +535,9 @@
               <td>{{dataRow.date | date:"medium"}}</td>
               <td>{{dataRow.ref_no}}</td>
               <td>{{dataRow.batch_no}}</td>
-              <td>{{dataRow.from_to}}</td>
-              <td>{{dataRow.qty_received}}</td>
-              <td>{{dataRow.qty_issued}}</td>
-              <td>{{dataRow.expiry_date | date:"mediumDate"}}</td>
-              <td>{{dataRow.balance}}</td>
-              <td>{{dataRow.remarks}}</td>
-              <td>{{dataRow.initials}}</td>
+              <td>{{dataRow.item_name}}</td>
+              <td>{{dataRow.quantity}}</td>
+              <td>{{dataRow.name}}</td>
             </tr>
           </tbody>
         </table>
