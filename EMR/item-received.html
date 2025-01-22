@@ -254,7 +254,7 @@
             $scope.startDate;
             $scope.endDate;
             $scope.loadedFilters = false;
-            $scope.dataSetUuid = "b78dec33-faeb-4e32-aacb-0d1863f07b51";
+            $scope.dataSetUuid = "81fb43a1-3df3-49f4-b715-6ae4f0e24cd4";
             $scope.loading = false;
             $scope.loaded = false;
             $scope.dataRows = [];
@@ -387,14 +387,20 @@
                 return value;
               }
             };
+
+            $scope.getTotalQuantity = () => {
+            return $scope.dataRows.reduce((total, row) => total + (row.quantity || 0), 0);
+          };
+
           },
         ]);
     </script>
   </head>
   <body>
     <div id="report-app" ng-app="reportModule" ng-controller="reportController">
-      <h2 class="text-center report-header">Bin Card</h2>
+      <h2 class="text-center report-header">Item Received Report</h2>
       <p ng-if="!loadedFilters">Loading filters ......................</p>
+      <!-- stockable items -->
       <div class="filters row" ng-if="loadedFilters">
         <div class="col-lg-3 col-md-3 col-sx-12 col-sm-12">
           <select
@@ -517,6 +523,9 @@
         </div>
       </div>
       <div style="width: 100%; overflow: auto; margin-top: 16px">
+        <div ng-if="!loading" style="margin-bottom: 10px;">
+          <h4>Total Quantity Received: {{ getTotalQuantity() }}</h4>
+        </div>
         <table class="table table-bordered" ng-if="!loading">
           <thead style="background-color: #2e8180; color: #fff">
             <tr>
@@ -524,13 +533,9 @@
               <th>Date</th>
               <th>Ref. No</th>
               <th>Batch</th>
-              <th>Receipt from/ issued to</th>
               <th>Quantity Received</th>
-              <th>Quantity Issued</th>
-              <th>Expiry Date</th>
-              <th>Balance</th>
-              <th>Remarks</th>
-              <th>Initials</th>
+              <th>Source Location</th>
+              <th>Destination Location</th>
             </tr>
           </thead>
           <tbody>
@@ -539,13 +544,9 @@
               <td>{{dataRow.date | date:"medium"}}</td>
               <td>{{dataRow.ref_no}}</td>
               <td>{{dataRow.batch_no}}</td>
-              <td>{{dataRow.from_to}}</td>
-              <td>{{dataRow.qty_received}}</td>
-              <td>{{dataRow.qty_issued}}</td>
-              <td>{{dataRow.expiry_date | date:"mediumDate"}}</td>
-              <td>{{dataRow.balance}}</td>
-              <td>{{dataRow.remarks}}</td>
-              <td>{{dataRow.initials}}</td>
+              <td>{{dataRow.quantity}}</td>
+              <td>{{dataRow.source_location}}</td>
+              <td>{{dataRow.destination_location}}</td>
             </tr>
           </tbody>
         </table>
