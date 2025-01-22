@@ -2,114 +2,140 @@
 <html lang="en">
   <head>
     <style>
-      #report-app .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        background-color: #f9f9f9;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      #report-app .loader-section {
+        padding: 5rem;
+        text-align: center;
+        background-color: #f2f2f2;
+        margin-top: 10px;
+        margin-bottom: 20px;
       }
 
-      #report-app .filters .item-selection,
-      #report-app .filters .date-input {
-        width: 100%;
-        max-width: 250px;
-        padding: 0.5rem;
-        border: 1px solid #d1d1d1;
+      #report-app .spaced {
+        margin-top: 2rem;
+      }
+
+      #report-app .item-selection {
+        padding: 6px 6px;
+        border: solid 1px #dbdada;
         border-radius: 4px;
-        background-color: #ffffff;
-        font-size: 1rem;
+        background-color: #fff !important;
       }
 
-      #report-app .filters .item-selection:focus,
-      #report-app .filters .date-input:focus {
-        outline: none;
-        border-color: #3498db;
-        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      #report-app .report-table th,
+      #report-app .report-table td {
+        text-align: center;
       }
 
-      #report-app .filters .btn-info {
-        padding: 0.6rem 1rem;
-        font-size: 1rem;
-        font-weight: bold;
+      #report-app .report-header {
+        font-weight: 600;
+        color: #222c;
+      }
+
+      #report-app thead {
+        background-color: #e2e2e252;
+      }
+
+      #report-app .active-btn {
         background-color: #3498db;
-        border-color: #3498db;
         color: #fff;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        font-weight: 600;
       }
 
-      #report-app .filters .btn-info:hover,
-      #report-app .filters .btn-info:focus {
-        background-color: #2874a6;
-        box-shadow: 0 2px 8px rgba(40, 116, 166, 0.2);
-        outline: none;
+      #report-app .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
       }
 
-      #report-app .filters .wrapper-item {
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #report-app .wrapper-item {
+        width: 600px;
         position: relative;
-        max-width: 300px;
-        width: 100%;
       }
-
-      #report-app .filters .selected-items-box-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem;
-        border: 1px solid #d1d1d1;
-        border-radius: 4px;
-        background-color: #ffffff;
+      #report-app .wrapper .selected-items-box,
+      #report-app .wrapper-item .selected-items-box-item {
         cursor: pointer;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
+        border: solid 1px #ddd;
+        padding: 5px;
+        background-color: transparent;
+        color: #222;
+        max-width: 592px;
       }
-
-      #report-app .filters .selected-items-box-item:hover {
-        border-color: #3498db;
-      }
-
-      #report-app .filters .list {
-        background-color: #ffffff;
-        position: absolute;
-        top: 100%;
-        left: 0;
+      #report-app .selected-items-box .items-list {
+        list-style-type: none;
         width: 100%;
-        border: 1px solid #d1d1d1;
-        border-radius: 4px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-      }
-
-      #report-app .filters .list .search-input {
-        width: calc(100% - 10px);
-        margin: 5px;
-        padding: 0.4rem;
-        border: 1px solid #d1d1d1;
-        border-radius: 4px;
-        font-size: 0.9rem;
-      }
-
-      #report-app .filters .list ul {
-        list-style: none;
-        margin: 0;
         padding: 0;
-        max-height: 200px;
-        overflow-y: auto;
+        margin: 0;
+      }
+      #report-app .selected-items-box .items-list li {
+        display: inline;
       }
 
-      #report-app .filters .list ul li {
-        padding: 0.5rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+      #report-app .wrapper .list,
+      #report-app .wrapper-item .list {
+        display: none;
+        max-height: 350px;
+        max-width: 600px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        border-left: solid 1px #c7c6c7;
+        border-right: solid 1px #c7c6c7;
+        border-bottom: solid 1px #c7c6c7;
+        z-index: 100;
+        position: absolute;
+        box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%),
+          0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+      }
+      #report-app .list .items-list {
+        list-style-type: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        height: 215px;
+        overflow: auto;
+      }
+      #report-app .list .items-list li {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        border-bottom: solid 1px #c7c6c7;
+        padding: 5px;
+        background-color: #fff;
       }
 
-      #report-app .filters .list ul li:hover {
-        background-color: #f0f8ff;
+      #report-app .selection-btn {
+        margin-left: 6px;
+        padding: 6px 6px;
+        border: solid 1px #dbdada;
+        border-radius: 4px;
+      }
+
+      #report-app .filters {
+        display: flex !important;
+        align-items: left;
+        justify-content: left;
       }
     </style>
 
@@ -361,14 +387,19 @@
                 return value;
               }
             };
+
+            $scope.getTotalQuantity = () => {
+            return $scope.dataRows.reduce((total, row) => total + (row.quantity || 0), 0);
+          };
           },
         ]);
     </script>
   </head>
   <body>
     <div id="report-app" ng-app="reportModule" ng-controller="reportController">
-      <h2 class="text-center report-header">Item Issued</h2>
+      <h2 class="text-center report-header">Item Issue Report</h2>
       <p ng-if="!loadedFilters">Loading filters ......................</p>
+      <!-- stockable items -->
       <div class="filters row" ng-if="loadedFilters">
         <div class="col-lg-3 col-md-3 col-sx-12 col-sm-12">
           <select
@@ -381,7 +412,7 @@
             <option></option>
           </select>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 col-sx-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-sx-12">
           <div style="width: 100%; z-index: 20; display: flex !important">
             <div class="wrapper-item" style="margin-left: 4px">
               <div
@@ -491,6 +522,9 @@
         </div>
       </div>
       <div style="width: 100%; overflow: auto; margin-top: 16px">
+        <div ng-if="!loading" style="margin-bottom: 10px;">
+          <h4>Total Quantity Issued: {{ getTotalQuantity() }}</h4>
+        </div>
         <table class="table table-bordered" ng-if="!loading">
           <thead style="background-color: #2e8180; color: #fff">
             <tr>
@@ -498,9 +532,9 @@
               <th>Date</th>
               <th>Ref. No</th>
               <th>Batch</th>
-              <!-- <th>Item Issued</th> -->
               <th>Quantity Issued</th>
-              <th>Location</th>
+              <th>Source Location</th>
+              <th>Destination Location</th>
             </tr>
           </thead>
           <tbody>
@@ -509,9 +543,9 @@
               <td>{{dataRow.date | date:"medium"}}</td>
               <td>{{dataRow.ref_no}}</td>
               <td>{{dataRow.batch_no}}</td>
-              <!-- <td>{{dataRow.item_name}}</td> -->
               <td>{{dataRow.quantity}}</td>
-              <td>{{dataRow.name}}</td>
+              <td>{{dataRow.source_location}}</td>
+              <td>{{dataRow.destination_location}}</td>
             </tr>
           </tbody>
         </table>
